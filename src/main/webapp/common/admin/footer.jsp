@@ -1,0 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+  <footer class="main-footer">
+    <strong>Copyright &copy; 2023 ONLINE ENTERTAINMENT. No copyright.</strong>
+  </footer>
