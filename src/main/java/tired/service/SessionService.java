@@ -1,8 +1,5 @@
 package tired.service;
 
-import org.springframework.stereotype.Service;
-
-@Service
 public interface SessionService {
 	
 	public void setAttribute(String key, Object value);

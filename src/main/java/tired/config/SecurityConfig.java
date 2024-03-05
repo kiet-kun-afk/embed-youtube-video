@@ -44,7 +44,7 @@ public class SecurityConfig {
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		return http.csrf(AbstractHttpConfigurer::disable)
 				.authorizeHttpRequests(req -> req
-						.requestMatchers("/")
+						.requestMatchers("/history", "favorites", "admin", "admin/**")
 						.authenticated()
 						.anyRequest()
 						.permitAll())
@@ -57,7 +57,7 @@ public class SecurityConfig {
 						.failureUrl("/failure"))
 				.logout(logout -> logout
 						.logoutUrl("/logout")
-						.logoutSuccessUrl("/login"))
+						.logoutSuccessUrl("/index"))
 				.exceptionHandling(e -> e
 						.accessDeniedPage("/accessDenied"))
 				.build();

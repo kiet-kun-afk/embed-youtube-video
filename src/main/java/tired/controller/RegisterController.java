@@ -87,10 +87,10 @@ public class RegisterController {
 
 		if (captcha.equals(hiddenCaptcha)) {
 			userRepository.save(
-					User.builder()
+					User
+					.builder()
 					.username(username)
-					.password(passwordEncoder
-							.encode(password))
+					.password(passwordEncoder.encode(password))
 					.role(newRole)
 					.isActive(true)
 					.email(email)

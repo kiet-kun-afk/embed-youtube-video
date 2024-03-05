@@ -15,6 +15,7 @@ import tired.entity.User;
 @SuppressWarnings("serial")
 @Builder
 public class Root implements UserDetails {
+	
 	private User user;
 	private List<GrantedAuthority> authorities;
 

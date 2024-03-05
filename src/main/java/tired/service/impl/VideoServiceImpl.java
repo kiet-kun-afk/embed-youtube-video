@@ -3,6 +3,7 @@ package tired.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -33,14 +34,14 @@ public class VideoServiceImpl implements VideoService{
 	}
 
 	@Override
-	public List<Video> findAll(int pageNumber, int pageSize) {
-		return null;
+	public Page<Video> findAll(int pageNumber, int pageSize) {
+		Pageable pageAble = PageRequest.of(pageNumber, pageSize);
+		return videoRepository.findAllActive(pageAble);
 	}
 
 	@Override
-	public List<Video> findRandom() {
-		Pageable pageable = PageRequest.of(0, 6);
-		return videoRepository.findRandom(pageable);
+	public Page<Video> findRandom(Pageable pageNumber) {
+		return videoRepository.findRandom(pageNumber);
 	}
 
 	@Override
@@ -55,7 +56,9 @@ public class VideoServiceImpl implements VideoService{
 
 	@Override
 	public Video upViews(Video entity) {
-		return null;
+		Integer views = entity.getViews() + 1;
+		entity.setViews(views);
+		return videoRepository.save(entity);
 	}
 
 	@Override

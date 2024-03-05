@@ -3,6 +3,7 @@ package tired.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import tired.dto.UserDto;
@@ -14,7 +15,10 @@ import tired.service.UserService;
 public class UserServiceImpl implements UserService{
 
 	@Autowired
-	UserRepository userRepository;
+	private UserRepository userRepository;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	@Override
 	public User findByID(Integer id) {
@@ -38,6 +42,15 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public User resetPassword(String email) {
+		User existUser = findByEmail(email);
+		if (existUser != null) {
+			// (Math.random()) * ((max - min) + 1)) + min
+			String newPass = String.valueOf((int) (Math.random() * ((9999 - 1000) + 1)) + 1000);
+			existUser.setPassword(passwordEncoder.encode(newPass));
+			User user = userRepository.save(existUser);
+			user.setPassword(newPass);
+			return user;
+		}
 		return null;
 	}
 
@@ -63,7 +76,7 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public User update(User entity) {
-		return null;
+		return userRepository.save(entity);
 	}
 
 	@Override

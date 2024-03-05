@@ -2,12 +2,9 @@ package tired.service;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
-
 import tired.dto.UserDto;
 import tired.entity.User;
 
-@Service
 public interface UserService {
 
 	User findByID(Integer id);

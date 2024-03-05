@@ -2,11 +2,11 @@ package tired.service;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import tired.entity.Video;
 
-@Service
 public interface VideoService {
 
 	Video findById(Integer id);
@@ -15,9 +15,9 @@ public interface VideoService {
 
 	List<Video> findAll();
 
-	List<Video> findAll(int pageNumber, int pageSize);
+	Page<Video> findAll(int pageNumber, int pageSize);
 
-	List<Video> findRandom();
+	Page<Video> findRandom(Pageable pageNumber);
 
 	Video create(Video entity);
 

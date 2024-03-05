@@ -3,7 +3,7 @@
 		<div class="row mb-4">
 			<div class="d-flex justify-content-end align-items-center">
 				<form action="" class="text-warning">
-					Page <span class="text-decoration-underline">${currentPage}</span> of ${maxPage}
+					Page <span class="">${videos.number + 1}</span> of ${videos.totalPages}
 				</form>
 			</div>
 		</div>
@@ -17,7 +17,7 @@
 						<img src="${video.poster}" alt="Image" class="img-fluid">
 						<figcaption class="d-flex align-items-center justify-content-center">
 							<h2>View more</h2>
-							<a href="<c:url value='/video?action=watch&id=${video.href}'/>">View more</a>
+							<a href="<c:url value='/video/watch?p=${video.href}'/>">View more</a>
 						</figcaption>
 					</figure>
 					<div class="d-flex justify-content-between tm-text-gray">

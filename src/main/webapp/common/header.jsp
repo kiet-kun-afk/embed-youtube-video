@@ -6,36 +6,36 @@
 			ONLINE ENTERTAINMENT
 		</a>
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+			<ul class="navbar-nav ml-auto mr-5 mb-2 mb-lg-0">
 				<c:choose>
 					<c:when test="${not empty currentUser}">
-					<li class="nav-item">
-						<a class="nav-link nav-link-1" aria-current="page" href="" data-toggle="modal" data-target="#changePassModal">Welcome, ${sessionScope.currentUser.username}</a>
-					</li>
-					<c:if test="${currentUser.role() == 'ADMIN'}">
+					<c:if test="${currentUser.getRole().getName() == 'ADMIN'}">
 						<li class="nav-item">
-							<a id="getmanager" class="nav-link nav-link-2" href="admin">Management</a>
+							<a id="getmanager" class="nav-link nav-link-2" href="/admin">Management</a>
 						</li>
 					</c:if>
 					<li class="nav-item">
-						<a class="nav-link nav-link-2" href="favorites">Favorite</a>
+						<a class="nav-link nav-link-3" href="/history">History</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link nav-link-3" href="history">History</a>
+						<a class="nav-link nav-link-2" href="/favorites">Favorite</a>
 					</li>
 					<li class="nav-item">
-						<a id="getlogout" class="nav-link nav-link-2" href="logout">Log out</a>
+						<a class="nav-link nav-link-1" aria-current="page" href="" data-toggle="modal" data-target="#changePassModal">Change password</a>
+					</li>
+					<li class="nav-item">
+						<a id="getlogout" class="nav-link nav-link-2" href="/logout">Log out</a>
 					</li>
 					</c:when>
 					<c:otherwise>
 					<li class="nav-item">
-						<a id="getlogin" class="nav-link nav-link-4" href="login">Login</a>
+						<a id="getlogin" class="nav-link nav-link-4" href="/login">Login</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link nav-link-3" href="register">Sig up</a>
+						<a class="nav-link nav-link-3" href="/register">Sign up</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link nav-link-1" href="forgotPass">Forgot password?</a>
+						<a class="nav-link nav-link-1" href="/forgotPass">Forgot password?</a>
 					</li>
 					</c:otherwise>
 				</c:choose>
@@ -46,7 +46,7 @@
 			  </button>
 			  <ul class="dropdown-menu">
 			    <li><a class="dropdown-item" href="language=en">English</a></li>
-			    <li><a class="dropdown-item" href="language=vi">Tiếng Việt</a></li>
+			    <li><a class="dropdown-item" href="../language=vi">Tiếng Việt</a></li>
 			  </ul>
 			</div>
 		</div>

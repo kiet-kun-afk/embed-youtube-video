@@ -17,26 +17,4 @@
 </footer>
 
 <script src="<c:url value='/templates/user/js/plugins.js'/>"></script>
-<script>
-	$(window).on("load", function() {
-		$('body').addClass('loaded');
-	});
-	$('#changePassBtn').click(function(){
-		$('#messageChangePass').text('');
-		var currentPass = $('#currentPass').val();
-		var newPass = $('#newPass').val();
-		var formData = {
-				'currentPass': currentPass,
-				'newPass': newPass
-		};
-		$.ajax({
-			url: 'changePass',
-			type: 'POST',
-			data: formData
-		}).then(function(data){
-			$('#messageChangePass').text('Your password has been changed successfully');
-		}).fail(function(error){
-			$('#messageChangePass').text('Your password is not correct, try again');
-		});
-	})
-</script>
+<script src="<c:url value='/templates/user/js/myjs.js'/>"></script>

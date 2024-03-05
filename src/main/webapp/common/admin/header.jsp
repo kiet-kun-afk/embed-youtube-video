@@ -8,19 +8,19 @@
 			<a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
 		</li>
 		<li class="nav-item d-none d-sm-inline-block">
-			<a href="/asm-java4/admin" class="nav-link">Home</a>
+			<a href="/admin" class="nav-link">Home</a>
 		</li>
 		<li class="nav-item d-none d-sm-inline-block">
-			<a href="/asm-java4/admin/video?action=view" class="nav-link">Video</a>
+			<a href="/admin/video?action=view" class="nav-link">Video</a>
 		</li>
 		<li class="nav-item d-none d-sm-inline-block">
-			<a href="/asm-java4/admin/user?action=view" class="nav-link">User</a>
+			<a href="/admin/user?action=view" class="nav-link">User</a>
 		</li>
 		<li class="nav-item d-none d-sm-inline-block">
-			<a href="/asm-java4/index" class="nav-link">Back OE</a>
+			<a href="/index" class="nav-link">Back OE</a>
 		</li>
 		<li class="nav-item d-none d-sm-inline-block">
-			<a href="/asm-java4/logout" class="nav-link">Log out ${afterPath}</a>
+			<a href="/logout" class="nav-link">Log out</a>
 		</li>
 	</ul>
 	<!-- Right navbar links -->

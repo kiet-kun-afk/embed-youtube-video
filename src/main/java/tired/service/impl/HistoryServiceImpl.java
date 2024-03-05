@@ -10,17 +10,17 @@ import tired.entity.History;
 import tired.entity.User;
 import tired.entity.Video;
 import tired.repo.HistoryRepository;
+import tired.repo.VideoRepository;
 import tired.service.HistoryService;
-import tired.service.VideoService;
 
 @Service
 public class HistoryServiceImpl implements HistoryService {
 
 	@Autowired
 	HistoryRepository historyRepository;
-
+	
 	@Autowired
-	VideoService videoService;
+	VideoRepository videoRepository;
 
 	@Override
 	public List<History> findByUser(String username) {
@@ -40,20 +40,20 @@ public class HistoryServiceImpl implements HistoryService {
 	@Override
 	public History create(User user, Video video) {
 		History existHistory = historyRepository.findByUserIdAndVideoId(user.getId(), video.getId());
-		if (existHistory != null) {
+		if (existHistory == null) {
 			existHistory = new History();
 			existHistory.setUser(user);
 			existHistory.setVideo(video);
 			existHistory.setViewedDate(new Timestamp(System.currentTimeMillis()));
 			existHistory.setIsLiked(Boolean.FALSE);
-			return historyRepository.save(existHistory);
+			historyRepository.save(existHistory);
 		}
 		return existHistory;
 	}
 
 	@Override
 	public Boolean updateLikeOrUnlike(User user, String videoHref) {
-		Video video = videoService.findByHref(videoHref);
+		Video video = videoRepository.findByHrefAndIsActiveTrue(videoHref);
 		History existHistory = findByUserIdAndVideoId(user.getId(), video.getId());
 
 		if (existHistory.getIsLiked() == Boolean.FALSE) {

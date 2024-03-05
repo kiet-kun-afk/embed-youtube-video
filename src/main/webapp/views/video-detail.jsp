@@ -8,8 +8,11 @@
         </div>
         <div class="row tm-mb-90">            
             <div class="col-xl-8 col-lg-7 col-md-6 col-sm-12">
-            	<iframe id="tm-video" src="https://www.youtube.com/embed/${video.href}" style="height: 650px;"></iframe>
-		   		<div class="tm-bg-gray tm-video-details mt-3" style="max-height: 500px; overflow: hidden; overflow-wrap: break-word;">
+			<iframe id="tm-video"
+				src="https://www.youtube.com/embed/${video.href}?autoplay=1"
+				style="height: 650px"
+				allow="autoplay; encrypted-media"></iframe>
+			<div class="tm-bg-gray tm-video-details mt-3" style="max-height: 500px; overflow: hidden; overflow-wrap: break-word;">
 			    	<c:if test="${not empty sessionScope.currentUser}">
 			    		<div class="d-flex">
 				       		<div class="mb-5 p-2">
@@ -36,13 +39,13 @@
             </div>
             <div class="col-xl-4 col-lg-5 col-md-6 col-sm-12">
                 <div class="row tm-mb-90 tm-gallery">
-					<c:forEach items="${videos}" var="item">
+					<c:forEach items="${videos.content}" var="item">
 						<div class="col-12 mb-5">
 							<figure class="effect-ming tm-video-item">
 								<img src="${item.poster}" alt="Image" class="img-fluid w-100">
 								<figcaption class="d-flex align-items-center justify-content-center">
 									<h2 style="overflow: hidden;">${item.title}</h2>
-									<a href="<c:url value='/video?action=watch&id=${item.href}'/>"></a>
+									<a href="<c:url value='/video/watch?p=${item.href}'/>"></a>
 								</figcaption>
 							</figure>
 						</div>
