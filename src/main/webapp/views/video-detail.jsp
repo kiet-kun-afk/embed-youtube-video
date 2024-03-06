@@ -57,6 +57,7 @@
 <div class="modal fade" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
+    <form action="./share" method="post" class="was-validated">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Share</h5>
       </div>
@@ -64,12 +65,14 @@
         <div class="form-group">
         	<input type="email" name="recipient" id="recipient" class="form-control rounded-0" placeholder="E-mail recipient?" required />
         </div>
+       	<input type="hidden" name="p" class="form-control rounded-0" value="${video.href }"/>
         <h5 class="text-danger" id="messageShare"></h5>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-warning" id="shareBtn">Send</button>
+        <button type="submit" class="btn btn-warning">Send</button>
         <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
       </div>
+      </form>
     </div>
   </div>
 </div>

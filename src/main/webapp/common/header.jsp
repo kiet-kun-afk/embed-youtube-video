@@ -56,15 +56,6 @@
 <div class="tm-hero d-flex justify-content-center align-items-center"
 	data-parallax="scroll"
 	data-image-src="<c:url value='/templates/user/img/banner.png'/>" style="height: 200px">
-	<%--
-	<form class="d-flex tm-search-form">
-		<input class="form-control tm-search-input" type="search"
-			placeholder="Search" aria-label="Search">
-		<button class="btn btn-outline-success tm-search-btn" type="submit">
-			<i class="fas fa-search"></i>
-		</button>
-	</form>
-	--%>
 </div>
 <!-- Modal -->
 <div class="modal fade" id="changePassModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -73,19 +64,20 @@
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
       </div>
-      <div class="modal-body">
-        <div class="form-group">
-        	<input type="password" name="currentPass" id="currentPass" class="form-control rounded-0" placeholder="Current password" required />
-        </div>
-        <div class="form-group">
-        	<input type="password" name="newPass" id="newPass" class="form-control rounded-0" placeholder="New password" required />
-        </div>
-        <h5 class="text-danger" id="messageChangePass"></h5>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-warning" id="changePassBtn">Save changes</button>
-      </div>
+      <form action="changePass" method="post" class="was-validated">
+	      <div class="modal-body">
+	        <div class="form-group">
+	        	<input type="password" name="currentPass" id="currentPass" class="form-control rounded-0" placeholder="Current password" required />
+	        </div>
+	        <div class="form-group">
+	        	<input type="password" name="newPass" id="newPass" class="form-control rounded-0" placeholder="New password" required />
+	        </div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="submit" class="btn btn-warning" id="changePassBtn">Save changes</button>
+	        <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+	      </div>
+      </form>
     </div>
   </div>
 </div>

@@ -1,5 +1,7 @@
 package tired.controller;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -7,8 +9,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -26,6 +30,8 @@ import tired.service.VideoService;
 public class VideoController {
 
 	private static final String layout = "view";
+	
+	private static final Logger logger = LogManager.getLogger(UserController.class);
 
 	@Autowired
 	SessionService session;
@@ -75,20 +81,21 @@ public class VideoController {
 		return "redirect:/index";
 	}
 
-	@GetMapping("share")
-	public String doShare(@RequestParam("p") String href) {
-		String recipient = request.getParameter("recipient");
-		User currentUser = (User) session.getAttribute(SessionAttr.CURRENT_USER);
-		response.setContentType("application/json");
+	@PostMapping("share")
+	public String doShare(RedirectAttributes attributes, @RequestParam("p") String href, @RequestParam("recipient") String recipient) {
+		User currentUser = session.getAttribute(SessionAttr.CURRENT_USER);
 		Video video = videoService.findByHref(href);
 		try {
 			emailService.share(currentUser, recipient, video);
 			videoService.upShare(video);
-			response.setStatus(204);
+			logger.info("Share successfully. The recipient has received the email.");
+			attributes.addFlashAttribute("share_video", "Share successfully. The recipient has received the email.");
 		} catch (Exception e) {
-			response.setStatus(400);
+			logger.info("Failed to share. Please try again.");
+			attributes.addFlashAttribute("share_video", "Failed to share. Please try again.");
 			e.printStackTrace();
 		}
-		return "redirect:/index";
+		String referrer = request.getHeader("referer");
+		return "redirect:" + referrer;
 	}
 }

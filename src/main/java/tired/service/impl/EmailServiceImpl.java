@@ -22,7 +22,7 @@ public class EmailServiceImpl implements EmailService {
 	private final String EMAIL_FORGOT_PASSWORD = "Forgot password";
 
 	@Autowired
-	private JavaMailSender sender;
+	JavaMailSender sender;
 
 	@Override
 	public void send(User recipient, String type){
