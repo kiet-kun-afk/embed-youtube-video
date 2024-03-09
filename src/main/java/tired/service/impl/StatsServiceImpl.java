@@ -18,7 +18,7 @@ public class StatsServiceImpl implements StatsService {
 
 	@Override
 	public List<VideoLikedInfo> findVideoLikedInfo() {
-		List<Object[]> objects = videoRepository.getInfoLikedVideo();
+		List<String[]> objects = videoRepository.getInfoLikedVideo();
 		List<VideoLikedInfo> result = new ArrayList<>();
 		objects.forEach(object -> {
 			VideoLikedInfo videoLikedInfo = setDataVideoLikedInfo(object);
@@ -27,12 +27,12 @@ public class StatsServiceImpl implements StatsService {
 		return result;
 	}
 
-	private VideoLikedInfo setDataVideoLikedInfo(Object[] object) {
+	private VideoLikedInfo setDataVideoLikedInfo(String[] object) {
 		VideoLikedInfo videoLikedInfo = new VideoLikedInfo();
-		videoLikedInfo.setVideoId((Integer) object[0]);
-		videoLikedInfo.setTitle((String) object[1]);
-		videoLikedInfo.setHref((String) object[2]);
-		videoLikedInfo.setTotalLike(object[3] == null ? 0 : (Integer) object[3]);
+		videoLikedInfo.setId((String)object[0]);
+		videoLikedInfo.setTitle((String)object[1]);
+		videoLikedInfo.setHref((String)object[2]);
+		videoLikedInfo.setLike((String)object[3]);
 		return videoLikedInfo;
 	}
 }

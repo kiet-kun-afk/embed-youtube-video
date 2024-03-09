@@ -25,23 +25,24 @@ public class EmailServiceImpl implements EmailService {
 	JavaMailSender sender;
 
 	@Override
-	public void send(User recipient, String type){
+	public void send(User recipient, String type) {
 		try {
 			String content = null;
 			String subject = null;
 			switch (type) {
-			case "welcome":
-				subject = EMAIL_WELCOME_SUBJECT;
-				content = "Dear " + recipient.getUsername() + ", hope you have a good time!";
-				break;
-			case "forgot":
-				subject = EMAIL_FORGOT_PASSWORD;
-				content = "Dear " + recipient.getUsername() + ", your new password here: " + recipient.getPassword();
-				break;
-			default:
-				subject = "Online Entertainment";
-				content = "Maybe this email is wrong, don't care about it";
-				break;
+				case "welcome":
+					subject = EMAIL_WELCOME_SUBJECT;
+					content = "Dear " + recipient.getUsername() + ", hope you have a good time!";
+					break;
+				case "forgot":
+					subject = EMAIL_FORGOT_PASSWORD;
+					content = "Dear " + recipient.getUsername() + ", your new password here: "
+							+ recipient.getPassword();
+					break;
+				default:
+					subject = "Sorry";
+					content = "Maybe this email is wrong, don't care about it";
+					break;
 			}
 			MailInfo mail = new MailInfo();
 			mail.setFrom(mail.getFrom());
@@ -55,7 +56,7 @@ public class EmailServiceImpl implements EmailService {
 	}
 
 	@Override
-	public void share(User sender, String recipient, Video video){
+	public void share(User sender, String recipient, Video video) {
 		try {
 			String content = null;
 			String subject = null;
@@ -73,7 +74,7 @@ public class EmailServiceImpl implements EmailService {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void sendEmail(MailInfo mail) throws MessagingException {
 		MimeMessage message = sender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");

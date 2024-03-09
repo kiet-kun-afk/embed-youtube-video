@@ -5,8 +5,8 @@ import lombok.Data;
 @Data
 public class VideoLikedInfo {
 
-	private Integer videoId;
+	private String id;
 	private String title;
 	private String href;
-	private Integer totalLike;
+	private String like;
 }

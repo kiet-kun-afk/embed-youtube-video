@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import jakarta.servlet.http.HttpServletResponse;
 import tired.constant.SessionAttr;
 import tired.entity.User;
 import tired.service.EmailService;
@@ -33,9 +32,6 @@ public class UserController {
 
 	@Autowired
 	SessionService session;
-
-	@Autowired
-	HttpServletResponse response;
 
 	@Autowired
 	PasswordEncoder passwordEncoder;

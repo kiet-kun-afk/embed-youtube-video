@@ -13,11 +13,11 @@ import tired.repo.VideoRepository;
 import tired.service.VideoService;
 
 @Service
-public class VideoServiceImpl implements VideoService{
+public class VideoServiceImpl implements VideoService {
 
 	@Autowired
 	VideoRepository videoRepository;
-	
+
 	@Override
 	public Video findById(Integer id) {
 		return videoRepository.findById(id).get();
@@ -46,12 +46,25 @@ public class VideoServiceImpl implements VideoService{
 
 	@Override
 	public Video create(Video entity) {
-		return null;
+		entity.setIsActive(Boolean.TRUE);
+		entity.setViews(0);
+		entity.setShares(0);
+		if (entity.getTitle().equals("") || entity.getHref().equals("")) {
+			return null;
+		} else {
+			entity.setPoster("https://img.youtube.com/vi/" + entity.getHref() + "/maxresdefault.jpg");
+			return videoRepository.save(entity);
+		}
 	}
 
 	@Override
 	public Video update(Video entity) {
-		return null;
+		if (entity.getTitle().equals("") || entity.getHref().equals("")) {
+			return null;
+		} else {
+			entity.setPoster("https://img.youtube.com/vi/" + entity.getHref() + "/maxresdefault.jpg");
+			return videoRepository.save(entity);
+		}
 	}
 
 	@Override
@@ -63,12 +76,16 @@ public class VideoServiceImpl implements VideoService{
 
 	@Override
 	public Video upShare(Video entity) {
-		return null;
+		Integer share = entity.getShares() + 1;
+		entity.setShares(share);
+		return videoRepository.save(entity);
 	}
 
 	@Override
 	public Video delete(String href) {
-		return null;
+		Video video = videoRepository.findByHrefAndIsActiveTrue(href);
+		video.setIsActive(Boolean.FALSE);
+		return videoRepository.save(video);
 	}
 
 }

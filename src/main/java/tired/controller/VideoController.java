@@ -30,7 +30,7 @@ import tired.service.VideoService;
 public class VideoController {
 
 	private static final String layout = "view";
-	
+
 	private static final Logger logger = LogManager.getLogger(UserController.class);
 
 	@Autowired
@@ -82,7 +82,8 @@ public class VideoController {
 	}
 
 	@PostMapping("share")
-	public String doShare(RedirectAttributes attributes, @RequestParam("p") String href, @RequestParam("recipient") String recipient) {
+	public String doShare(RedirectAttributes attributes, @RequestParam("p") String href,
+			@RequestParam("recipient") String recipient) {
 		User currentUser = session.getAttribute(SessionAttr.CURRENT_USER);
 		Video video = videoService.findByHref(href);
 		try {

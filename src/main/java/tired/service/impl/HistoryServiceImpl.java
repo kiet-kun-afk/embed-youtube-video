@@ -18,7 +18,7 @@ public class HistoryServiceImpl implements HistoryService {
 
 	@Autowired
 	HistoryRepository historyRepository;
-	
+
 	@Autowired
 	VideoRepository videoRepository;
 

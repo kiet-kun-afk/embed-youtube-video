@@ -1,8 +1,5 @@
 <script src="<c:url value='/templates/admin/plugins/jquery-ui/jquery-ui.min.js'/>"></script>
 <script src="<c:url value='/templates/admin/plugins/jquery/jquery.min.js'/>"></script>
-<script>
-  $.widget.bridge('uibutton', $.ui.button)
-</script>
 <script src="<c:url value='/templates/admin/plugins/bootstrap/js/bootstrap.bundle.min.js'/>"></script>
 <script src="<c:url value='/templates/admin/plugins/chart.js/Chart.min.js'/>"></script>
 <script src="<c:url value='/templates/admin/plugins/sparklines/sparkline.js'/>"></script>
@@ -11,7 +8,8 @@
 <script src="<c:url value='/templates/admin/plugins/jquery-knob/jquery.knob.min.js'/>"></script>
 <script src="<c:url value='/templates/admin/plugins/moment/moment.min.js'/>"></script>
 <script src="<c:url value='/templates/admin/plugins/daterangepicker/daterangepicker.js'/>"></script>
-<script src="<c:url value='/templates/admin/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js'/>"></script>
+<script
+  src="<c:url value='/templates/admin/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js'/>"></script>
 <script src="<c:url value='/templates/admin/plugins/summernote/summernote-bs4.min.js'/>"></script>
 <script src="<c:url value='/templates/admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js'/>"></script>
 <script src="<c:url value='/templates/admin/dist/js/adminlte.js'/>"></script>

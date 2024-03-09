@@ -25,7 +25,7 @@ public class LoginController {
 		attributes.addFlashAttribute("message", "Login success");
 		return "redirect:/index";
 	}
-	
+
 	@RequestMapping("/failure")
 	public String handleLoginFailure(RedirectAttributes attributes) {
 		attributes.addFlashAttribute("message", "Email or password is not true");

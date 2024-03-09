@@ -16,17 +16,17 @@ import tired.entity.Role;
 import tired.entity.Role.RoleEnum;
 import tired.entity.User;
 import tired.repo.RoleRepository;
-import tired.repo.UserRepository;
+import tired.service.UserService;
 import tired.util.CaptchaUtil;
 
 @Controller
 public class RegisterController {
 
 	@Autowired
-	UserRepository userRepository;
-	
-	@Autowired
 	RoleRepository roleRepository;
+
+	@Autowired
+	UserService userService;
 
 	@Autowired
 	PasswordEncoder passwordEncoder;
@@ -86,15 +86,15 @@ public class RegisterController {
 		roleRepository.save(newRole);
 
 		if (captcha.equals(hiddenCaptcha)) {
-			userRepository.save(
-					User
+			User user = User
 					.builder()
 					.username(username)
 					.password(passwordEncoder.encode(password))
 					.role(newRole)
 					.isActive(true)
 					.email(email)
-					.build());
+					.build();
+			userService.register(user);
 		} else {
 			attributes.addFlashAttribute("message", "Captcha does not match!");
 			return "redirect:/register";

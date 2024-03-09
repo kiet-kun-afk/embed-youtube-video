@@ -6,23 +6,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import tired.dto.UserDto;
 import tired.entity.User;
 import tired.repo.UserRepository;
 import tired.service.UserService;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserRepository userRepository;
-	
+
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
+
 	@Override
-	public User findByID(Integer id) {
-		return null;
+	public List<User> findAllActive() {
+		return userRepository.findByIsActiveTrueAndRole_Name("USER");
 	}
 
 	@Override
@@ -36,8 +35,8 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public User login(String username, String password) {
-		return null;
+	public List<User> findAllInactive() {
+		return userRepository.findByIsActiveFalse();
 	}
 
 	@Override
@@ -56,7 +55,7 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public List<User> findAll() {
-		return null;
+		return userRepository.findAll();
 	}
 
 	@Override
@@ -65,13 +64,14 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public User register(String username, String password, String email) {
-		return null;
+	public User register(User user) {
+		return userRepository.save(user);
 	}
 
 	@Override
-	public User create(String username, String password, String email, Boolean isadmin) {
-		return null;
+	public User activeUser(User user) {
+		user.setIsActive(true);
+		return userRepository.save(user);
 	}
 
 	@Override
@@ -81,12 +81,14 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public User delete(String username) {
-		return null;
+		User user = userRepository.findByUsernameAndIsActiveTrue(username);
+		user.setIsActive(Boolean.FALSE);
+		return userRepository.save(user);
 	}
 
 	@Override
-	public List<UserDto> findUsersLikedVideoByVideoHref(String href) {
-		return null;
+	public User findByUsernameAndIsActiveFalse(String username) {
+		return userRepository.findByUsernameAndIsActiveFalse(username);
 	}
-	
+
 }
