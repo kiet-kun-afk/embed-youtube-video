@@ -49,7 +49,7 @@
 											<c:when test="${ativeAsideDown=='C2'}">
 												<button id="activation${item.username}" type="button"
 													onclick="activeUser('${item.username}')"
-													class="btn btn-block btn-danger btn-sm"
+													class="btn btn-block btn-success btn-sm"
 													style="height: 30px; width: 100px;"><i
 														class="fas fa-user-check"></i>
 													Enable

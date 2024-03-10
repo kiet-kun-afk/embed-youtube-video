@@ -18,7 +18,7 @@ public class Video {
 	@Column(name = "title")
 	private String title;
 
-	@Column(name = "href")
+	@Column(name = "href", unique = true)
 	private String href;
 
 	@Column(name = "poster")

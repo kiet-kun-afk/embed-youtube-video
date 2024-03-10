@@ -64,6 +64,13 @@
 									<p>New or edit</p>
 								</a>
 							</li>
+							<li class="nav-item">
+								<a id="getneworedit" href="/admin/video/inactiveVideos"
+									class="nav-link ${ativeAsideDown=='B3'?'active':''}">
+									<i class="far fa-circle nav-icon"></i>
+									<p>Inactive videos</p>
+								</a>
+							</li>
 						</ul>
 					</li>
 					<li class="nav-item ${ativeAside=='C'?'menu-open':''}">

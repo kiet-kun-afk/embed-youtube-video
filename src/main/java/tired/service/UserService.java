@@ -12,15 +12,15 @@ public interface UserService {
 
 	User findByUserName(String username);
 
+	User findExistUsername(String username);
+
+	User findExistEmail(String email);
+
 	User findByUsernameAndIsActiveFalse(String username);
 
 	List<User> findAllInactive();
 
 	User resetPassword(String email);
-
-	List<User> findAll();
-
-	List<User> findAll(int pageNumber, int pageSize);
 
 	User register(User user);
 

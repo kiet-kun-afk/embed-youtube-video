@@ -49,6 +49,7 @@ public class RegisterController {
 		user.setRealCaptcha(CaptchaUtil.encodeCaptcha(captcha));
 	}
 
+	@SuppressWarnings("null")
 	@PostMapping("/handle-register")
 	public String handleRegister(RedirectAttributes attributes,
 			@RequestParam("username") String username,
@@ -58,6 +59,16 @@ public class RegisterController {
 			@RequestParam(name = "role", required = false) String role,
 			@RequestParam("captcha") String captcha,
 			@RequestParam("hiddenCaptcha") String hiddenCaptcha) {
+
+		if (userService.findExistUsername(username) != null) {
+			attributes.addFlashAttribute("message", "Username already exists!");
+			return "redirect:/register";
+		}
+
+		if (userService.findExistEmail(email) != null) {
+			attributes.addFlashAttribute("message", "Email already exists!");
+			return "redirect:/register";
+		}
 
 		if (!password.equals(cfmpass)) {
 			attributes.addFlashAttribute("message", "Passwords do not match!");

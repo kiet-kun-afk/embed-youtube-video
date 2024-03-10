@@ -24,21 +24,33 @@ public class HistoryServiceImpl implements HistoryService {
 
 	@Override
 	public List<History> findByUser(String username) {
+		if (username == null) {
+			return null;
+		}
 		return historyRepository.findByUserAndVideoActive(username);
 	}
 
 	@Override
 	public List<History> findByUserAndIsLiked(String username) {
+		if (username == null) {
+			return null;
+		}
 		return historyRepository.findByUserAndIsLiked(username);
 	}
 
 	@Override
 	public History findByUserIdAndVideoId(Integer userId, Integer videoId) {
+		if (userId == null || videoId == null) {
+			return null;
+		}
 		return historyRepository.findByUserIdAndVideoId(userId, videoId);
 	}
 
 	@Override
 	public History create(User user, Video video) {
+		if (video == null || video == null) {
+			return null;
+		}
 		History existHistory = historyRepository.findByUserIdAndVideoId(user.getId(), video.getId());
 		if (existHistory == null) {
 			existHistory = new History();
@@ -53,9 +65,17 @@ public class HistoryServiceImpl implements HistoryService {
 
 	@Override
 	public Boolean updateLikeOrUnlike(User user, String videoHref) {
+		if (user == null || videoHref == null || videoHref.isEmpty()) {
+			return false;
+		}
 		Video video = videoRepository.findByHrefAndIsActiveTrue(videoHref);
+		if (video == null) {
+			return false;
+		}
 		History existHistory = findByUserIdAndVideoId(user.getId(), video.getId());
-
+		if (existHistory == null) {
+			return false;
+		}
 		if (existHistory.getIsLiked() == Boolean.FALSE) {
 			existHistory.setIsLiked(Boolean.TRUE);
 			existHistory.setLikedDate(new Timestamp(System.currentTimeMillis()));

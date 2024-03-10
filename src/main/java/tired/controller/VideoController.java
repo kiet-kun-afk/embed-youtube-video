@@ -55,7 +55,7 @@ public class VideoController {
 	public String getWatch(Model model, @RequestParam("p") String href) {
 		Video video = videoService.findByHref(href);
 		Pageable pageNumber = PageRequest.of(0, 5);
-		Page<Video> videos = videoService.findRandom(pageNumber);
+		Page<Video> videos = videoService.findRandom(pageNumber, href);
 		videoService.upViews(video);
 		User user = session.getAttribute(SessionAttr.CURRENT_USER);
 		if (user != null) {

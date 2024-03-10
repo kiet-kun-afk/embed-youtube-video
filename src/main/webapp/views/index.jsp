@@ -6,7 +6,8 @@
 		<head>
 			<meta charset="UTF-8">
 			<meta name="viewport" content="width=device-width, initial-scale=1.0">
-			<title>NEVER STOP GIVING UP</title>
+			<title>VIDEOS</title>
+			<link rel="icon" href="/templates/user/img/home.png" type="image/x-icon">
 			<%@ include file="/common/head.jsp" %>
 		</head>
 

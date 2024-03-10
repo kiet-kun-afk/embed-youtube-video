@@ -75,6 +75,7 @@ public class EmailServiceImpl implements EmailService {
 		}
 	}
 
+	@SuppressWarnings("null")
 	public void sendEmail(MailInfo mail) throws MessagingException {
 		MimeMessage message = sender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");

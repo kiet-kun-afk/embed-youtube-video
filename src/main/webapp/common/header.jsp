@@ -3,7 +3,7 @@
 		<div class="container-fluid">
 			<a id="getindex" class="navbar-brand text-warning" href="<c:url value='/index'/>"> <i
 					class="text-danger fa-regular fa-face-kiss-wink-heart"></i>
-				HELLO
+				<img class="w-50" src="/templates/user/img/home.png" alt="">
 			</a>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav ml-auto mr-5 mb-2 mb-lg-0">
@@ -41,7 +41,7 @@
 						</c:otherwise>
 					</c:choose>
 				</ul>
-				<div class="dropdown mb-2 mb-lg-0">
+				<!-- <div class="dropdown mb-2 mb-lg-0">
 					<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
 						aria-expanded="false">
 						<i class="fas fa-globe"></i>
@@ -50,13 +50,13 @@
 						<li><a class="dropdown-item" href="language=en">English</a></li>
 						<li><a class="dropdown-item" href="../language=vi">Tiếng Việt</a></li>
 					</ul>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</nav>
 
 	<div class="tm-hero d-flex justify-content-center align-items-center" data-parallax="scroll"
-		data-image-src="<c:url value='/templates/user/img/banner.png'/>" style="height: 200px">
+		data-image-src="<c:url value='/templates/user/img/banner.jpg'/>">
 	</div>
 	<!-- Modal -->
 	<div class="modal fade" id="changePassModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -74,7 +74,7 @@
 						</div>
 						<div class="form-group">
 							<input type="password" name="newPass" id="newPass" class="form-control rounded-0"
-								placeholder="New password" required />
+								placeholder="New password" pattern=".{8,}" required />
 						</div>
 					</div>
 					<div class="modal-footer">

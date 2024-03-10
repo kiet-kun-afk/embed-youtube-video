@@ -9,15 +9,21 @@ import tired.entity.Video;
 
 public interface VideoService {
 
-	Video findById(Integer id);
+	List<Video> getInactiveVideos();
+
+	List<Video> findExistVideoExcludingCurrent(Video video, String href);
+
+	Video findExistVideo(String href);
 
 	Video findByHref(String href);
+
+	Video findVideoInactiveByHref(String href);
 
 	List<Video> findAll();
 
 	Page<Video> findAll(int pageNumber, int pageSize);
 
-	Page<Video> findRandom(Pageable pageNumber);
+	Page<Video> findRandom(Pageable pageNumber, String href);
 
 	Video create(Video entity);
 
@@ -28,4 +34,6 @@ public interface VideoService {
 	Video upShare(Video entity);
 
 	Video delete(String href);
+
+	Video recoverVideo(Video video);
 }

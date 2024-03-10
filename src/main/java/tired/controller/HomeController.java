@@ -29,10 +29,10 @@ public class HomeController {
 
 	@Autowired
 	VideoService videoService;
-	
+
 	@Autowired
 	UserService userService;
-	
+
 	@Autowired
 	HistoryService historyService;
 
@@ -72,7 +72,7 @@ public class HomeController {
 		List<Video> videos = new ArrayList<>();
 		histories.forEach(item -> videos.add(item.getVideo()));
 		model.addAttribute("videos", videos);
-		model.addAttribute(layout, "user/history.jsp");
+		model.addAttribute(layout, "user/favorites.jsp");
 		return "index";
 	}
 

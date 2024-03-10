@@ -3,6 +3,8 @@ package tired.controller.admin;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jakarta.servlet.http.HttpServletRequest;
+import tired.constant.SessionAttr;
 import tired.dto.VideoLikedInfo;
 import tired.entity.User;
 import tired.entity.Video;
+import tired.service.SessionService;
 import tired.service.StatsService;
 import tired.service.UserService;
 import tired.service.VideoService;
@@ -29,6 +33,9 @@ public class AdminController {
     HttpServletRequest request;
 
     @Autowired
+    SessionService session;
+
+    @Autowired
     VideoService videoService;
 
     @Autowired
@@ -37,8 +44,19 @@ public class AdminController {
     @Autowired
     UserService userService;
 
+    private User getAuthen() {
+        User user = null;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        user = userService.findByUserName(authentication.getName());
+        if (user != null) {
+            session.setAttribute(SessionAttr.CURRENT_USER, user);
+        }
+        return user;
+    }
+
     @RequestMapping("admin")
     public String home(Model model) {
+        getAuthen();
         List<VideoLikedInfo> videos = statsService.findVideoLikedInfo();
         model.addAttribute("videos", videos);
         model.addAttribute("ativeAside", "A");
@@ -48,10 +66,21 @@ public class AdminController {
 
     @RequestMapping("admin/video")
     public String viewVideo(Model model) {
+        getAuthen();
         List<Video> videos = videoService.findAll();
         model.addAttribute("videos", videos);
         model.addAttribute("ativeAside", "B");
         model.addAttribute("ativeAsideDown", "B1");
+        model.addAttribute(layout, "admin/video-overview.jsp");
+        return "layout";
+    }
+
+    @RequestMapping("admin/video/inactiveVideos")
+    public String inactiveVideos(Model model) {
+        List<Video> videos = videoService.getInactiveVideos();
+        model.addAttribute("videos", videos);
+        model.addAttribute("ativeAside", "B");
+        model.addAttribute("ativeAsideDown", "B3");
         model.addAttribute(layout, "admin/video-overview.jsp");
         return "layout";
     }
@@ -86,6 +115,12 @@ public class AdminController {
             @RequestParam("title") String title,
             @RequestParam("href") String href,
             @RequestParam("description") String description) {
+
+        if (videoService.findExistVideo(href) != null) {
+            attributes.addFlashAttribute("error", "Video already exist");
+            String preString = request.getHeader("referer");
+            return "redirect:" + preString;
+        }
         Video video = new Video();
         video.setTitle(title);
         video.setHref(href);
@@ -106,10 +141,20 @@ public class AdminController {
             @RequestParam("title") String title,
             @RequestParam("href") String href,
             @RequestParam("description") String description) {
+        if (href.length() < 10) {
+            attributes.addFlashAttribute("error", "Href must be at least 10 characters");
+            String preString = request.getHeader("referer");
+            return "redirect:" + preString;
+        }
         Video video = videoService.findByHref(oldHref);
         video.setTitle(title);
         video.setHref(href);
         video.setDescription(description);
+        if (!videoService.findExistVideoExcludingCurrent(video, href).isEmpty()) {
+            attributes.addFlashAttribute("error", "Video with the same href already exists");
+            String preString = request.getHeader("referer");
+            return "redirect:" + preString;
+        }
         video = videoService.update(video);
         if (video != null) {
             return "redirect:/admin/video";
@@ -149,5 +194,11 @@ public class AdminController {
     public void activeUser(@RequestParam("username") String username) {
         User user = userService.findByUsernameAndIsActiveFalse(username);
         userService.activeUser(user);
+    }
+
+    @PostMapping("admin/video/recover")
+    public void recoverVideo(@RequestParam("href") String href) {
+        Video video = videoService.findVideoInactiveByHref(href);
+        videoService.recoverVideo(video);
     }
 }

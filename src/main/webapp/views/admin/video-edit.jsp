@@ -45,7 +45,7 @@
 									<div class="form-group">
 										<label for="href">Href</label> <input type="text" id="href" name="href"
 											placeholder="Href" required value="${video != null ? video.href : ''}"
-											class="form-control">
+											class="form-control" pattern=".{10,}">
 									</div>
 									<div class="form-group">
 										<label for="youtube_link">Youtube link</label> <input type="text"
@@ -98,7 +98,7 @@
 							</button>
 						</div>
 						<div>
-							<h5 class="danger">${error}</h5>
+							<h5 class="text-danger">${error}</h5>
 						</div>
 					</div>
 				</form>
