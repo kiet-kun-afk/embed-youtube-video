@@ -15,8 +15,10 @@
                             <input type="password" name="password" class="form-control rounded-0" placeholder="Password"
                                 required />
                         </div>
+                        <input type="checkbox" name="remember-me" id="remember" />
+                        <label for="remember">remember me?</label>
                         <div class="form-group tm-text-right">
-                            <button name="dologin" type="submit" class="btn btn-secondary">Send</button>
+                            <button name="do-login" type="submit" class="btn btn-secondary">Send</button>
                         </div>
                     </form>
                 </div>

@@ -66,7 +66,7 @@
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
 				</div>
-				<form action="changePass" method="post" class="was-validated">
+				<form action="/changePass" method="post" class="was-validated">
 					<div class="modal-body">
 						<div class="form-group">
 							<input type="password" name="currentPass" id="currentPass" class="form-control rounded-0"

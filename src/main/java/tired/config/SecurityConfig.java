@@ -15,9 +15,9 @@ import org.springframework.security.web.SecurityFilterChain;
 import lombok.RequiredArgsConstructor;
 import tired.auth.MyUserDetailsService;
 
+@EnableMethodSecurity()
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
 
@@ -42,7 +42,7 @@ public class SecurityConfig {
 
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		return http.csrf(AbstractHttpConfigurer::disable)
+		http.csrf(AbstractHttpConfigurer::disable)
 				.authorizeHttpRequests(req -> req
 						.requestMatchers("/history", "favorites", "admin", "admin/**")
 						.authenticated()
@@ -57,9 +57,13 @@ public class SecurityConfig {
 						.failureUrl("/failure"))
 				.logout(logout -> logout
 						.logoutUrl("/logout")
-						.logoutSuccessUrl("/index"))
+						.logoutSuccessUrl("/index")
+						.deleteCookies("JSESSIONID"))
 				.exceptionHandling(e -> e
 						.accessDeniedPage("/accessDenied"))
-				.build();
+				.rememberMe(rememberMe -> rememberMe
+						.tokenValiditySeconds(86400)
+						.key("remember-me-key"));
+		return http.build();
 	}
 }

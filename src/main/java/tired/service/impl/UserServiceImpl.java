@@ -64,8 +64,13 @@ public class UserServiceImpl implements UserService {
 			} else {
 				randomString = Integer.toString(randomNumber);
 			}
+			User user = new User();
+			user.setUsername(existUser.getUsername());
+			user.setEmail(existUser.getEmail());
+			user.setPassword(randomString);
 			existUser.setPassword(passwordEncoder.encode(randomString));
-			return existUser;
+			userRepository.save(existUser);
+			return user;
 		}
 		return null;
 	}
